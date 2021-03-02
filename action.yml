@@ -1,9 +1,17 @@
 name: "Hugo Build"
 description: "Hugo as an action, with extended support and legacy versions"
-author: jakejarvis
-runs:
-  using: docker
-  image: docker://ghcr.io/jakejarvis/hugo-extended:0.81.0
+author: pedrogk
 branding:
   icon: edit
   color: gray-dark
+
+inputs:
+  firebase_token:
+    description: "Firebase token used to deploy on Firebase on your behalf. You can get it using command 'firebase login:ci' and then set it in Github Secrets as FIREBASE_SECRET variable."
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.firebase_token }}
